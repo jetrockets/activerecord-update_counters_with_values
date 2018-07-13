@@ -10,7 +10,7 @@ module ActiveRecord
         returns = build_returns(counters)
 
         (<<~SQL)
-          UPDATE #{@klass.connection.quote_table_name(table_name)}
+          UPDATE #{@klass.connection.quote_table_name(@klass.table_name)}
           SET
             #{updates}
           WHERE
@@ -31,7 +31,7 @@ module ActiveRecord
       end
 
       def build_conditions(id)
-        conditions = ["#{@klass.connection.quote_table_name(table_name)}.#{@klass.connection.quote_column_name(primary_key)}"]
+        conditions = ["#{@klass.connection.quote_table_name(@klass.table_name)}.#{@klass.connection.quote_column_name(@klass.primary_key)}"]
         if Array.wrap(id).size > 1
           conditions << "IN (#{Array.wrap(id).map{ |id| @klass.connection.quote(id) }.join(', ')})"
         else
@@ -41,8 +41,8 @@ module ActiveRecord
       end
 
       def build_returns(counters)
-        returns = [connection.quote_column_name(primary_key)]
-        returns << counters.map { |counter_name, value| connection.quote_column_name(counter_name) }
+        returns = [@klass.connection.quote_column_name(@klass.primary_key)]
+        returns << counters.map { |counter_name, value| @klass.connection.quote_column_name(counter_name) }
         returns.flatten.join(', ')
       end
     end
