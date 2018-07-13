@@ -1,18 +1,21 @@
-module UpdateCountersWithValues
-  def increment_counter_returning_value(counter, id)
-    query = "
-    UPDATE \"#{table_name}\"
-    SET
-      \"#{counter}\" = COALESCE(\"#{counter}\", 0) + 1
-    WHERE
-      \"#{table_name}\".\"#{primary_key}\" = #{connection.quote(id)}
-    RETURNING
-      \"#{counter}\";
-    "
-    result = connection.execute(query, "#{class_name.to_s} increment #{counter}")
+require 'update_counters_with_values/version'
 
-    result[0][counter.to_s]
-  end
+module UpdateCountersWithValues
+  puts "!!!!!!!!"
+  # def increment_counter_returning_value(counter, id)
+  #   query = "
+  #   UPDATE \"#{table_name}\"
+  #   SET
+  #     \"#{counter}\" = COALESCE(\"#{counter}\", 0) + 1
+  #   WHERE
+  #     \"#{table_name}\".\"#{primary_key}\" = #{connection.quote(id)}
+  #   RETURNING
+  #     \"#{counter}\";
+  #   "
+  #   result = connection.execute(query, "#{class_name.to_s} increment #{counter}")
+
+  #   result[0][counter.to_s]
+  # end
 
   def update_counters_and_return_values(id, counters)
     updates = counters.map do |counter_name, value|
@@ -24,7 +27,7 @@ module UpdateCountersWithValues
     query = "
     UPDATE \"#{table_name}\"
     SET
-      \"#{counter}\" = COALESCE(\"#{counter}\", 0) + 1
+      #{updates}
     WHERE
       \"#{table_name}\".\"#{primary_key}\" = #{connection.quote(id)}
     RETURNING
