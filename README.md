@@ -1,15 +1,13 @@
 # Activerecord::Increment::And::Return
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/activerecord/increment/and/return`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Update ActiveRecord counter and update instance value
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'activerecord-increment-and-return'
+gem 'activerecord-update_counters_with_values', require: 'active_record/update_counters_with_values'
 ```
 
 And then execute:
@@ -18,11 +16,31 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install activerecord-increment-and-return
+    $ gem install activerecord-update_counters_with_values
 
 ## Usage
 
-TODO: Write usage instructions here
+### Class methods
+
+```ruby
+MyModel.update_counters_and_return_values(1, comments_count: 1)
+MyModel.update_counters_and_return_values(1, comments_count: 1, another_count: 2)
+MyModel.update_counters_and_return_values([1,2], comments_count: 1, another_count: 2)
+
+MyModel.increment_counter_and_return_value(1, :comments_count)
+MyModel.decrement_counter_and_return_value(1, :comments_count)
+```
+
+### Instance methods
+
+```ruby
+document = Document.first
+document.update_counters_with_values(comments_count: 1)
+document.update_counters_with_values(comments_count: 1, another_count: 2)
+
+document.increment_counter_with_value(:comments_count)
+document.decrement_counter_with_value(:comments_count)
+```
 
 ## Development
 
