@@ -1,4 +1,4 @@
-# Activerecord::Increment::And::Return
+# Activerecord::UpdateCountersWithValues
 
 Update ActiveRecord counter and update instance value
 
@@ -19,6 +19,13 @@ Or install it yourself as:
     $ gem install activerecord-update_counters_with_values
 
 ## Usage
+
+```ruby
+class MyModel < ActiveRecord::Base
+  include Activerecord::UpdateCountersWithValues
+
+  #...
+```
 
 ### Class methods
 
