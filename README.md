@@ -25,6 +25,7 @@ class MyModel < ActiveRecord::Base
   include Activerecord::UpdateCountersWithValues
 
   #...
+end
 ```
 
 ### Class methods
