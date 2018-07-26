@@ -1,4 +1,4 @@
-# Activerecord::UpdateCountersWithValues
+# ActiveRecord::UpdateCountersWithValues
 
 Update ActiveRecord counter and update instance value
 
