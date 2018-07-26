@@ -5,7 +5,7 @@ module ActiveRecord
     module ClassMethods
       def update_counters_and_return_values(id, counters)
         query = ActiveRecord::UpdateCountersWithValues::QueryBuilder.new(self).call(id, counters)
-        connection.execute(query, "#{class_name.to_s} Update Counters").to_a
+        connection.execute(query, "#{name.to_s} Update Counters: #{counters}").to_a
       end
 
       def increment_counter_and_return_value(id, counter)
