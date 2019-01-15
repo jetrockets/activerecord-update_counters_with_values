@@ -12,8 +12,9 @@ module ActiveRecord
 
       counters.each do |key, value|
         write_attribute(key, results[key.to_s])
-        clear_attribute_changes(key)
       end
+
+      clear_attribute_changes(counters.keys)
 
       self
     end
